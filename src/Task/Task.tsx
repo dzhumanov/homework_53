@@ -1,15 +1,19 @@
-interface Task {
-    text: string;
-    key: string;
+import React from "react";
+
+interface TaskProps {
+  text: string;
+  key: string;
+  onDelete: () => void;
 }
 
-const Task = (props: Task) => {
-    return (
-        <div className="task">
-            <p>{props.text}</p>
-            <button type="button" className="delete-btn">Delete</button>
-        </div>
-    );
+const Task: React.FC<TaskProps> = ({text, onDelete}) => {
+  return (
+    <div className="task">
+      <p>{text}</p>
+      <button type="button" className="delete-btn" onClick={onDelete}>Delete</button>
+    </div>
+  );
 };
+
 
 export default Task;
