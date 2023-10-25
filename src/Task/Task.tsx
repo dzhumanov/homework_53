@@ -7,7 +7,7 @@ const Task = (props: Task) => {
     return (
         <div className="task">
             <p>{props.text}</p>
-            <button type="button" className="delete-btn"></button>
+            <button type="button" className="delete-btn">Delete</button>
         </div>
     );
 };
