@@ -11,8 +11,8 @@ const TaskForm:React.FC<TaskFormProps> = ({
 }) => {
     return (
         <div className="form-wrapper">
-            <input type="text" placeholder="Add new task" onChange={onTextEdit} value={inputValue}/>
-            <button type="button" onClick={addTask}>Add</button>
+            <input type="text" placeholder="Add new task" id="name" className="form__input" onChange={onTextEdit} value={inputValue}/>
+            <button type="button" onClick={addTask} className="btn">Add</button>
         </div>
     );
 };

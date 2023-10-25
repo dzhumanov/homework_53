@@ -1,7 +1,12 @@
-import './App.css'
+import './App.css';
 import React, {useState} from "react";
 import Task from './Task/Task';
-import TaskForm from './AddTaskForm/AddTaskForm'
+import TaskForm from './AddTaskForm/AddTaskForm';
+
+interface Task {
+  text: string;
+  key: string;
+}
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([
@@ -15,6 +20,21 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const addTask = () => {   
+    const lastKey = tasks.length > 0 ? parseInt(tasks[tasks.length - 1].key): 0;
+    const newTask = {
+      text: inputValue,
+      key: (lastKey + 1).toString(),
+    };
+    setTasks([...tasks, newTask]);
+    setInputValue('');
+  };
+
+  const [inputValue, setInputValue] = useState('');
+
+  const textEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
 
   let taskList = tasks.map((task) => {
     return (
@@ -26,28 +46,12 @@ function App() {
     );
   });
 
-  const [inputValue, setInputValue] = useState('');
-
-  const textEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-
-  const addTask = () => {   
-    const lastKey = tasks.length > 0 ? parseInt(tasks[tasks.length - 1].key) + 1 : 0;
-    const newTask = {
-      text: inputValue,
-      key: (lastKey + 1).toString(),
-    };
-    setTasks([...tasks, newTask]);
-    setInputValue('');
-};
-
   return (
     <div className='container'>
       <TaskForm onTextEdit={textEdit} addTask={addTask} inputValue={inputValue}/>
       {taskList}
     </div>
-    )
-}
+    );
+};
 
-export default App
+export default App;
